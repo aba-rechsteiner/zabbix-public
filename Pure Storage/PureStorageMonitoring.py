@@ -76,7 +76,7 @@ def pure_array_info():
         arraySpace = arrayConnect.get(space="true")
         arrayInfo = arrayConnect.get()
         arrayPhoneHome = arrayConnect.get_phonehome()
-        #arrayRemoteAssist = arrayConnect.get_remote_assist_status()
+        arrayRemoteAssist = arrayConnect.get_remote_assist_status()
         arrayValues = arraySpace[0]
 
         '''Will disable the output to console'''
@@ -120,10 +120,10 @@ def pure_array_info():
             arrayVersion = str(arrayInfo["version"])
             m = ZabbixMetric(host,'pure.array.version',arrayVersion)
             metrics.append(m)
-        #if "status" in arrayRemoteAssist:
-        #    remoteAssist = arrayRemoteAssist["status"]
-        #    m = ZabbixMetric(host,'pure.remote.assist',remoteAssist)
-        #    metrics.append(m)
+        if "status" in arrayRemoteAssist:
+            remoteAssist = arrayRemoteAssist["status"]
+            m = ZabbixMetric(host,'pure.remote.assist',remoteAssist)
+            metrics.append(m)
         if "phonehome" in arrayPhoneHome:
             phoneHome = arrayPhoneHome["phonehome"]
             m = ZabbixMetric(host,'pure.phone.home',phoneHome)
